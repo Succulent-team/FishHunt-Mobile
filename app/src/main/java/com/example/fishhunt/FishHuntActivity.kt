@@ -5,20 +5,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 
-class MainActivity : AppCompatActivity() {
-
+class FishHuntActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val intent = Intent(this, MainActivity2::class.java)
-        startActivity(intent)
-        finish()
+        setContentView(R.layout.activity_fish_hunt)
     }
-    fun go_to_2(view: View){
+    fun back_to_menu(view: View){
         val randomIntent = Intent(this, MainActivity2::class.java)
         startActivity(randomIntent)
     }
 
-//    var examp : Fish = Fish(90, "gtbu")
+    fun go_make_foto(view: View){}
 }
