@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">fishhunt</string>
+    <string name="btn_start_app">Start app!</string>
+    <string name="counter">1</string>
+    <string name="title">hello</string>
+    <string name="btn_1">button 1</string>
+    <string name="btn_2">button 2</string>
+</resources>
