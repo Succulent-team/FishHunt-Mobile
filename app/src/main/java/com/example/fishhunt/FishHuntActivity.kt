@@ -8,6 +8,7 @@ import android.view.View
 class FishHuntActivity : AppCompatActivity() {
     val name_of_fish = "517"
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fish_hunt)
@@ -22,4 +23,5 @@ class FishHuntActivity : AppCompatActivity() {
         randomIntent.putExtra(CameraActivity.NAME_OF_FISH, name_of_fish)
         startActivity(randomIntent)
     }
+
 }

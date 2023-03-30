@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">fishhunt</string>
+
     <string name="app_label">WhatFish</string>
+
     <string name="empty_text"> </string>
     <string name="title_fish_hunt">Фотоохота</string>
 
