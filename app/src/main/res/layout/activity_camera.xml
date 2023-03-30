@@ -6,9 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".CameraActivity">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/some"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView" />-->
+    <ImageView
+        android:id="@+id/camera_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="400dp"
+        android:height="400dp"
+        android:background="@color/purple_200"
+        android:layout_centerHorizontal="true"
+        />
+    <Button
+        android:id="@+id/take_foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="50dp"
+        android:height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

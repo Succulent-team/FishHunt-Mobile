@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/loading"
+    android:background="@drawable/back_loading"
     tools:context=".MainActivity">
 
 
-
-    <Button
-        android:id="@+id/btn_start_app"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:width="50dp"
+        android:height="50dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+        android:background="@drawable/btn_loading"
         android:gravity="center"
-        android:layout_marginHorizontal="100sp"
-        android:layout_marginTop="200sp"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="400dp"
-        android:onClick="go_to_2"/>
+
+        android:onClick="go_to_2" />
 
 </RelativeLayout>
