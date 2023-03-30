@@ -4,60 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/fotohunt"
     tools:context=".MainActivity2">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="30sp"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:layout_marginTop="20sp"
-        android:text="@string/title"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/counter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="30sp"
-        android:textAlignment="center"
-        android:layout_marginTop="20sp"
-        android:text="@string/counter"
-        android:layout_below="@id/title"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/btn_1"
-        android:onClick="countMe"
+        android:id="@+id/btn_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/counter"
-        android:text="@string/btn_1"
-        android:gravity="left"
-        android:layout_marginTop="200sp"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="400dp" />
-    <Button
-        android:id="@+id/btn_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/counter"
-        android:text="@string/btn_2"
         android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:width="200sp"
+        android:height="250sp"
+        android:background="@color/empty_color"
+        android:text="@string/empty_text"
+        android:onClick="go_to_other_games"
+        />
+
+    <Button
+        android:id="@+id/btn_start_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-
-        android:layout_marginTop="200sp"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="400dp"/>
-
-
+        android:width="200sp"
+        android:height="250sp"
+        android:background="@color/empty_color"
+        android:text="@string/empty_text"
+        android:onClick="go_to_game"
+        />
 </RelativeLayout>
