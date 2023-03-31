@@ -8,10 +8,9 @@ import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 
 class CameraActivity : AppCompatActivity() {
-    private lateinit var some: TextView
+//    private lateinit var some: TextView
     companion object {
         const val NAME_OF_FISH = "BAD_TEXT"
 
@@ -25,8 +24,8 @@ class CameraActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_camera)
 
-        some = findViewById(R.id.some)
-        val count = intent.getStringExtra(NAME_OF_FISH)
+//        some = findViewById(R.id.some)
+//        val count = intent.getStringExtra(NAME_OF_FISH)
 
 
         imageView = findViewById(R.id.camera_view)
