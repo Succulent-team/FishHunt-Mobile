@@ -7,48 +7,67 @@ import android.view.View
 import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import org.json.JSONObject
 
 
 class FishHuntActivity : AppCompatActivity() {
     open val name_of_fish = "fish"
     private lateinit var name_target: TextView
+    private lateinit var photo_target: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fish_hunt)
         name_target = findViewById(R.id.name_of_target)
-        name_target.text = "bvrenhdjvrnm"
-
-        val url = "http://10.50.16.163:5000"
-        web_func(url)
-
-    }
-
-    fun back_to_menu(view: View){
-        val randomIntent = Intent(this, MainActivity2::class.java)
-        startActivity(randomIntent)
-    }
-
-    fun go_make_foto(view: View){
-        val randomIntent = Intent(this, CameraActivity::class.java)
-        randomIntent.putExtra(CameraActivity.NAME_OF_FISH, name_of_fish)
-        startActivity(randomIntent)
-    }
-
-    private fun web_func(url: String) {
+        photo_target = findViewById(R.id.photo_of_target)
         val queue = Volley.newRequestQueue(this)
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String> { response ->
-                name_target.text = response.toString()
+        val url = "http://10.50.16.163:5000"
+        val jsonParams = JSONObject()
+        jsonParams.put("name", "10");
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            url,
+            jsonParams,
+            Response.Listener<JSONObject> { response ->
+                var temp: JSONObject = response
+                name_target.text = temp.get("name").toString()
             },
-            Response.ErrorListener { name_target.text = "That didn't work!" })
+            Response.ErrorListener { name_target.text = "Not Work" })
+        queue.add(request)
 
-        queue.add(stringRequest)
+        fun back_to_menu(view: View) {
+            val randomIntent = Intent(this, MainActivity2::class.java)
+            startActivity(randomIntent)
+        }
+
+        fun go_make_photo(view: View) {
+            val randomIntent = Intent(this, CameraActivity::class.java)
+            randomIntent.putExtra(CameraActivity.NAME_OF_FISH, name_of_fish)
+            startActivity(randomIntent)
+        }
+
+//    fun web_func(url: String) {
+//        val queue = Volley.newRequestQueue(this)
+//        val stringRequest = StringRequest(
+//            Request.Method.GET, url,
+//            Response.Listener<String> { response ->
+//                name_target.text = "tfvgbnhj"
+////                name_target.text = response.toString()[0]
+////                func(response)
+//            },
+//            Response.ErrorListener { name_target.text = "That didn't work!" })
+//
+//        queue.add(stringRequest)
+//    }
+//    private fun func(response: String){
+//        var temp: JSONObject = JSONObject(response)
+//        var name = temp.get("photo").toString()
+//        name_target.text = temp.get("name").toString()
+//        photo_target.text = "SHHHHHHHHHHHIIIIIIIISSSHHH"
+//
+//    }
     }
-
-
 }
