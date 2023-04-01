@@ -24,7 +24,7 @@ class FishHuntActivity : AppCompatActivity() {
         name_target = findViewById(R.id.name_of_target)
         photo_target = findViewById(R.id.photo_of_target)
         val queue = Volley.newRequestQueue(this)
-        val url = "http://10.50.16.163:5000"
+        val url = "http://192.168.20.73:5000"
         val jsonParams = JSONObject()
         jsonParams.put("name", "10");
         val request = JsonObjectRequest(
@@ -34,6 +34,10 @@ class FishHuntActivity : AppCompatActivity() {
             Response.Listener<JSONObject> { response ->
                 var temp: JSONObject = response
                 name_target.text = temp.get("name").toString()
+                val photo = temp.get("photo").toString()
+                val double_photo = photo + photo + photo
+                photo_target.text = "fvygbnhjm"
+
             },
             Response.ErrorListener { name_target.text = "Not Work" })
         queue.add(request)
