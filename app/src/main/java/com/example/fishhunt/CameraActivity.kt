@@ -11,27 +11,18 @@ import android.widget.ImageView
 
 class CameraActivity : AppCompatActivity() {
 //    private lateinit var some: TextView
-    companion object {
-        const val NAME_OF_FISH = "BAD_TEXT"
-
-    }
     private val REQUEST_TAKE_PHOTO = 1
-
     private lateinit var imageView: ImageView
+    private lateinit var take_photo: Button
+    private lateinit var go_check_photo: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_camera)
-
-//        some = findViewById(R.id.some)
-//        val count = intent.getStringExtra(NAME_OF_FISH)
-
-
         imageView = findViewById(R.id.camera_view)
-        val button: Button = findViewById(R.id.take_foto)
-
-        button.setOnClickListener {
+        take_photo = findViewById(R.id.take_photo)
+        take_photo = findViewById(R.id.take_photo)
+        take_photo.setOnClickListener {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
@@ -39,6 +30,9 @@ class CameraActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,17 +43,9 @@ class CameraActivity : AppCompatActivity() {
             val thumbnailBitmap = data?.extras?.get("data") as Bitmap
             imageView.setImageBitmap(thumbnailBitmap)
         }
-
-        // Другой вариант с применением when
-        /*when(requestCode){
-            REQUEST_TAKE_PHOTO ->{
-                if(resultCode == Activity.RESULT_OK && data !== null){
-                    imageView.setImageBitmap(data.extras?.get("data") as Bitmap)
-                }
-            }
-            else ->{
-                Toast.makeText(this, "Wrong request code", Toast.LENGTH_SHORT).show()
-            }
-        }*/
     }
+
+
+
+
 }

@@ -19,6 +19,7 @@ class FishHuntActivity : AppCompatActivity() {
     open val name_of_fish = "fish"
     private lateinit var res_request: TextView
     private lateinit var background_image: ImageView
+    private var now_id_fish: String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,11 @@ class FishHuntActivity : AppCompatActivity() {
         background_image = findViewById(R.id.background_image)
         res_request = findViewById(R.id.res_request)
 
-        make_get_request("http://10.50.16.163:5000/fish/")
+        val arguments = getIntent().getExtras()
+        now_id_fish = arguments?.getString("now_id_fish")
+        val url_for_get_info = "http://10.50.16.163:5000/fish/$now_id_fish/"
+        res_request.text = url_for_get_info
+//        make_get_request("http://10.50.16.163:5000/fish/")
 
     }
 
@@ -38,7 +43,7 @@ class FishHuntActivity : AppCompatActivity() {
 
     fun go_make_photo(view: View) {
         val randomIntent = Intent(this, CameraActivity::class.java)
-        randomIntent.putExtra(CameraActivity.NAME_OF_FISH, name_of_fish)
+        randomIntent.putExtra("id_fish", now_id_fish)
         startActivity(randomIntent)
     }
 
@@ -48,7 +53,7 @@ class FishHuntActivity : AppCompatActivity() {
             Request.Method.GET, url,
             Response.Listener<String> { response ->
                 val resp : JSONObject = JSONObject(response)
-                res_request.text = resp.get("name").toString()
+                val name = resp.get("name").toString()
                 val description = resp.get("description").toString()
                 val url_to_fish = resp.get("image").toString()
                 make_picasso(url_to_fish, background_image)

@@ -10,16 +10,11 @@
         android:id="@+id/res_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="100dp"
+        android:height="300dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:text="@string/app_label"
-        android:textSize="@android:dimen/notification_large_icon_width"
-        android:textColor="@color/black"
-
-
-
-
+        android:textSize="20dp"
        />
     <Button
         android:layout_width="410dp"
@@ -42,8 +37,7 @@
         android:textColor="@color/black"
         android:text="@string/menu"
         android:textSize="35dp"
-        android:onClick="back_to_menu"
-        >
+        android:onClick="back_to_menu">
 
     </Button>
 </RelativeLayout>

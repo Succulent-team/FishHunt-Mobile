@@ -21,7 +21,9 @@ class MainActivity2 : AppCompatActivity() {
         toasting.show()
     }*/
     fun go_to_game(view: View){
-        val randomIntent = Intent(this, FishHuntActivity::class.java)
-        startActivity(randomIntent)
+        val intent = Intent(this, FishHuntActivity::class.java)
+        intent.putExtra("now_id_fish", "1")
+        startActivity(intent)
+
     }
 }
