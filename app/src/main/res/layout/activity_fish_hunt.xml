@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <ImageView
-        android:id="@+id/background_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-    <TextView
-        android:id="@+id/res_request"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="100dp"
-        android:text="@string/app_label"
-        android:textSize="20dp"
-       />
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/gameplay">
+
     <Button
         android:layout_width="410dp"
         android:layout_height="wrap_content"
@@ -27,17 +14,36 @@
         android:background="@drawable/row"
         android:text="@string/empty_text"
         android:textSize="@android:dimen/notification_large_icon_width"
-        android:onClick="go_make_photo"
         />
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="75dp"
-        android:background="@drawable/row"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/black"
-        android:text="@string/menu"
-        android:textSize="35dp"
-        android:onClick="back_to_menu">
+        <Button
+            android:layout_width="150dp"
+            android:id="@+id/menu_1"
+            android:layout_height="75dp"
+            android:background="@drawable/row"
+            android:textColor="@color/black"
+            android:layout_alignRight="@+id/textView"
+            android:text="@string/menu"
+            android:textSize="35dp"
 
-    </Button>
+            >
+
+        </Button>
+        <Button
+            android:layout_width="260dp"
+            android:layout_height="150dp"
+            android:layout_alignRight="@+id/textView"
+            android:background="@drawable/row"
+            android:layout_above="@+id/textView">
+
+        </Button>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fish"
+            android:layout_alignLeft="@+id/textView"
+            android:textSize="40dp"
+            android:layout_below ="@+id/menu_1"
+            >
+
+        </TextView>
 </RelativeLayout>
