@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import org.json.JSONObject
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class FishHuntActivity : AppCompatActivity() {
@@ -24,23 +23,15 @@ class FishHuntActivity : AppCompatActivity() {
         name_target = findViewById(R.id.name_of_target)
         photo_target = findViewById(R.id.photo_of_target)
         val queue = Volley.newRequestQueue(this)
-        val url = "http://192.168.20.73:5000"
-        val jsonParams = JSONObject()
-        jsonParams.put("name", "10");
-        val request = JsonObjectRequest(
-            Request.Method.POST,
-            url,
-            jsonParams,
-            Response.Listener<JSONObject> { response ->
-                var temp: JSONObject = response
-                name_target.text = temp.get("name").toString()
-                val photo = temp.get("photo").toString()
-                val double_photo = photo + photo + photo
-                photo_target.text = "fvygbnhjm"
+        val url_address = "http://192.168.20.73:5000/"
+        val params = "param1=1&param2=XXX"
+        val inp: InputStream? = null
+        var url : URL = URL(url_address)
+        var client = url.openConnection() as HttpURLConnection
+//        client.connect()
+//        val responseCode: Int = client.getResponseCode()
+//        name_target.text = responseCode.toString()
 
-            },
-            Response.ErrorListener { name_target.text = "Not Work" })
-        queue.add(request)
 
         fun back_to_menu(view: View) {
             val randomIntent = Intent(this, MainActivity2::class.java)
