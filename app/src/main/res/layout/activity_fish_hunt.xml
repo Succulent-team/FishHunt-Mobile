@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/gameplay">
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    <TextView
+        android:id="@+id/res_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:text="@string/app_label"
+        android:textSize="@android:dimen/notification_large_icon_width"
+        android:textColor="@color/black"
 
+
+
+
+       />
     <Button
         android:layout_width="410dp"
         android:layout_height="wrap_content"
@@ -14,6 +32,7 @@
         android:background="@drawable/row"
         android:text="@string/empty_text"
         android:textSize="@android:dimen/notification_large_icon_width"
+        android:onClick="go_make_photo"
         />
     <Button
         android:layout_width="150dp"
@@ -23,7 +42,7 @@
         android:textColor="@color/black"
         android:text="@string/menu"
         android:textSize="35dp"
-
+        android:onClick="back_to_menu"
         >
 
     </Button>
