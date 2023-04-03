@@ -12,10 +12,12 @@ import android.widget.TextView
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var some: TextView
+
     companion object {
         const val NAME_OF_FISH = "BAD_TEXT"
 
     }
+
     private val REQUEST_TAKE_PHOTO = 1
 
     private lateinit var imageView: ImageView

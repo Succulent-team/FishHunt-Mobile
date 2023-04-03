@@ -3,7 +3,10 @@
 
     <string name="app_label">WhatFish</string>
 
-    <string name="empty_text"> </string>
+    <string name="empty_text">Поехали!</string>
     <string name="title_fish_hunt">Фотоохота</string>
-
+    <string name="other">Другие игры</string>
+    <string name="play">Начать игру</string>
+    <string name="call">ФОТООХОТА</string>
+    <string name="menu">МЕНЮ</string>
 </resources>
