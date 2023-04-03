@@ -43,7 +43,8 @@
 
     <Button
         android:id="@+id/callname"
-        android:layout_width="match_parent"
+        android:layout_width="500dp"
+        android:layout_centerHorizontal="true"
         android:layout_height="106dp"
         android:layout_marginTop="158dp"
         android:background="@drawable/roundstyle"
@@ -55,10 +56,11 @@
 
     <Button
         android:id="@+id/line"
-        android:layout_width="match_parent"
+        android:layout_width="500dp"
         android:layout_height="4dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/white">
 
     </Button>
