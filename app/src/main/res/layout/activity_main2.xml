@@ -36,7 +36,8 @@
         android:textColor="#0C0C73"
         android:text="@string/play"
         android:textSize="35sp"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:onClick="go_to_game">
 
 
     </Button>
