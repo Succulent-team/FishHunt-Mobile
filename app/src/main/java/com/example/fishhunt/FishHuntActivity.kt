@@ -76,7 +76,7 @@ class FishHuntActivity : AppCompatActivity() {
         Picasso.with(this)
             .load(url)
             .into(item);
-        Log.d("pic", "image")
+        Log.d("pic", url)
     }
 
 }

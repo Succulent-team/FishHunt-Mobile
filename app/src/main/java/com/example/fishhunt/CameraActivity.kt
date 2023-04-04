@@ -106,18 +106,19 @@ class CameraActivity : AppCompatActivity() {
     }
 
     fun access(){
-        val randomIntent = Intent(this, resultActivity::class.java)
+        val randomIntent = Intent(this, ResultOkActivity::class.java)
         randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
     }
     fun fail(){
-        val randomIntent = Intent(this, resultActivity::class.java)
+        val randomIntent = Intent(this, ResultFailActivity::class.java)
         randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
     }
 
     fun not_work(){
         take_photo.text = "not work"
+        fail()
     }
 
 
