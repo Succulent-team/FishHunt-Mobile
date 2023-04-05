@@ -4,31 +4,33 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/back_2"
+        android:id="@+id/background_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:background="@color/white"/>
-
-
-
+        android:src="@drawable/gameplay" />
 
     <Button
         android:id="@+id/menu_1"
         android:layout_width="150dp"
         android:layout_height="75dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:layout_alignRight="@+id/textView"
         android:background="@drawable/row"
         android:text="@string/menu"
-        android:textColor="@color/black"
+        android:textColor="#0f484d"
         android:textSize="35dp"
         android:onClick="back_to_menu"/>
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_1"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
         android:layout_alignLeft="@+id/textView"
         android:text="@string/fish"
         android:textSize="40dp"/>
@@ -42,24 +44,16 @@
         android:layout_alignRight="@+id/textView"
         android:background="@drawable/row"/>
 
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-
-
     <Button
         android:id="@+id/textView"
-        android:layout_width="410dp"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/row"
         android:padding="5dp"
         android:text="@string/empty_text"
-        android:textColor="@color/black"
+        android:textColor="#0f484d  "
         android:textSize="@android:dimen/notification_large_icon_width"
         android:onClick="go_make_photo"/>
 </RelativeLayout>
