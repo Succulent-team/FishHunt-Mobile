@@ -21,9 +21,8 @@
         android:textColor="#0C0C73"
         android:text="@string/other"
         android:textSize="25sp"
-        android:textStyle="bold">
+        android:textStyle="bold"/>
 
-    </Button>
 
     <Button
         android:id="@+id/button2"
@@ -37,10 +36,9 @@
         android:text="@string/play"
         android:textSize="35sp"
         android:textStyle="bold"
-        android:onClick="go_to_game">
+        android:onClick="go_to_game"/>
 
 
-    </Button>
 
     <Button
         android:id="@+id/callname"
@@ -51,9 +49,8 @@
         android:background="@drawable/roundstyle"
         android:text="@string/call"
         android:textColor="#0C0C73"
-        android:textSize="60dp">
+        android:textSize="60dp"/>
 
-    </Button>
 
     <Button
         android:id="@+id/line"
@@ -62,9 +59,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
         android:layout_centerHorizontal="true"
-        android:background="@color/white">
+        android:background="@color/white"/>
 
-    </Button>
     <TextView
         android:id="@+id/text_view_id"
         android:layout_height="wrap_content"
