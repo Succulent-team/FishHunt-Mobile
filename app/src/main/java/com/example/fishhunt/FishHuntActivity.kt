@@ -18,12 +18,11 @@ import org.json.JSONObject
 
 
 class FishHuntActivity : AppCompatActivity() {
-    open val name_of_fish = "fish"
     private lateinit var name: TextView
     private lateinit var description: Button
     private lateinit var photo: ImageView
     private var now_id_fish: String = ""
-    val url_start = "https://306c-2a03-d000-7005-f007-abad-39be-d4b6-b7ef.ngrok.io"
+    private val url_start = "https://85f8-2a03-d000-7005-f007-abad-39be-d4b6-b7ef.ngrok.io"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,19 +57,34 @@ class FishHuntActivity : AppCompatActivity() {
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             Response.Listener<String> { response ->
-                Log.d("response", response.toString())
-                val resp : JSONObject = JSONObject(response)
-                Log.d("resp", resp.toString())
-                name.text = resp.getString("name")
-                description.text = resp.getString("description")
-                val url_to_fish_resp = resp.getString("image")
-                Log.d("response", resp.getString("image"))
-                make_picasso(url_to_fish_resp, photo)
+                val json = JSONObject(response)
+                val name_resp = json.getString("description")
+                var count = 0
+                val bytes = name_resp.toByteArray()
+                for (i in bytes){
+                    Log.d("---", (i * -1).toString())
+                    count += 1
+                    if (count%4==0){
+                        Log.d("---", "---------")
+                    }
+                }
+                Log.d("--", count.toString())
+//
+//                val resp = JSONObject(jsonString)
+
+
+//                description.text = resp.getString("description")
+//                val url_to_fish_resp = resp.getString("image")
+//                Log.d("response", resp.getString("image"))
+//                make_picasso(url_to_fish_resp, photo)
             },
             Response.ErrorListener { name.text = "That didn't work!" })
 
         queue.add(stringRequest)
     }
+
+
+
 
     fun make_picasso(url : String, item : ImageView){
         Picasso.with(this)

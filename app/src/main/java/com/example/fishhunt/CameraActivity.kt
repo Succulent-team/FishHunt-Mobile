@@ -66,7 +66,7 @@ class CameraActivity : AppCompatActivity() {
             // Фотка сделана, извлекаем миниатюру картинки
             val thumbnailBitmap = data?.extras?.get("data") as Bitmap
 
-            val url_for_get_info = "$url_start/post_fish/"
+            val url_for_get_info = "$url_start/validate_fish/"
 
             val bitmap = thumbnailBitmap
             val stream = ByteArrayOutputStream()
