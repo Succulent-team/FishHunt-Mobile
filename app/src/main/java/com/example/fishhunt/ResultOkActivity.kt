@@ -12,12 +12,16 @@ class ResultOkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_ok)
-        go = findViewById(R.id.go)
         val arguments = getIntent().getExtras()
         now_id_fish = arguments?.getString("now_id_fish").toString()
     }
-    fun go_to_fish_hunt(view: View){
+    fun go_fish(view: View){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
+        randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
+        startActivity(randomIntent)
+    }
+    fun go_menu(view: View){
+        val randomIntent = Intent(this, MainActivity2::class.java)
         randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
         startActivity(randomIntent)
     }

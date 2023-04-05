@@ -13,12 +13,16 @@
         android:layout_marginBottom="136dp"
         android:alpha="0.4"
         android:background="@drawable/round"/>
+
+
     <ImageView
         android:id="@+id/back_2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/ok_f" />
+
+
     <Button
         android:layout_width="370dp"
         android:layout_height="150dp"
@@ -39,7 +43,15 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/good"
         android:background="@drawable/round"/>
+
+
+
+
+
+
+
     <Button
+        android:id="@+id/go_fish"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_marginBottom="40dp"
@@ -50,9 +62,11 @@
         android:textSize="40dp"
         android:layout_alignParentBottom="true"
         android:textColor="#013220"
-        android:background="@drawable/nach"/>
+        android:background="@drawable/nach"
+        android:onClick="go_fish"/>
 
     <Button
+        android:id="@+id/go_menu"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_marginBottom="40dp"
@@ -63,7 +77,8 @@
         android:textSize="40dp"
         android:layout_alignParentBottom="true"
         android:textColor="#013220"
-        android:background="@drawable/nach"/>
+        android:background="@drawable/nach"
+        android:onClick="go_menu"/>
 
     <ImageView
         android:id="@+id/logo"
