@@ -34,7 +34,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
-        imageView = findViewById(R.id.camera_view)
+//        imageView = findViewById(R.id.camera_view)
         take_photo = findViewById(R.id.take_photo)
         some = findViewById(R.id.some)
         val arguments = getIntent().getExtras()
