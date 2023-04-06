@@ -21,11 +21,13 @@ class ResultFailActivity : AppCompatActivity() {
         val randomIntent = Intent(this, FishHuntActivity::class.java)
         randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
+        finish()
     }
     fun go_menu(view: View){
         val randomIntent = Intent(this, MainActivity2::class.java)
         randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
+        finish()
     }
 
 

@@ -21,9 +21,6 @@
             android:name=".ResultOkActivity"
             android:exported="false" />
         <activity
-            android:name=".CameraActivity"
-            android:exported="false" />
-        <activity
             android:name=".FishHuntActivity"
             android:exported="false" />
         <activity

@@ -24,6 +24,7 @@ class MainActivity2 : AppCompatActivity() {
         val intent = Intent(this, FishHuntActivity::class.java)
         intent.putExtra("now_id_fish", "1")
         startActivity(intent)
+        finish()
 
     }
 }

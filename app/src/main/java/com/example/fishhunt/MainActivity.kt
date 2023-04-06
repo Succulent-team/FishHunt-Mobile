@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     fun go_to_2(view: View){
         val randomIntent = Intent(this, MainActivity2::class.java)
         startActivity(randomIntent)
+        finish()
     }
-
-//    var examp : Fish = Fish(90, "gtbu")
 }
