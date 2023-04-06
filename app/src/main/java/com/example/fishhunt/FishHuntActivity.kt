@@ -152,8 +152,16 @@ class FishHuntActivity : AppCompatActivity() {
 
 
     fun make_picasso(url : String, item : ImageView) {
+        var temp = R.drawable.fish_1
+        when(now_id_fish.toInt()){
+            (1) -> temp=R.drawable.fish_1
+            (2) -> temp=R.drawable.fish_2
+            (3) -> temp=R.drawable.fish_3
+            (4) -> temp=R.drawable.fish_4
+        }
+
         Picasso.with(this)
-            .load(url)
+            .load(temp)
             .centerCrop()
             .fit()
             .into(item);
