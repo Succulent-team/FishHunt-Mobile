@@ -150,15 +150,17 @@ class FishHuntActivity : AppCompatActivity() {
 
 
 
-    fun make_picasso(url : String, item : ImageView){
-        val url_test = "https://raw.githubusercontent.com/matv864/progamist/main/images/third.jpg"
+
+    fun make_picasso(url : String, item : ImageView) {
         Picasso.with(this)
-            .load(url_test)
+            .load(url)
             .centerCrop()
             .fit()
             .into(item);
         Log.d("pic", url)
+
     }
+
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------
