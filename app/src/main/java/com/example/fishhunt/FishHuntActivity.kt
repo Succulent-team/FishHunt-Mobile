@@ -22,7 +22,7 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var description: Button
     private lateinit var photo: ImageView
     private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
-    private var arrayId : IntArray? = IntArray(0)
+    private var stringId = ""
     private var randomId = 0
 
 
@@ -35,8 +35,15 @@ class FishHuntActivity : AppCompatActivity() {
         photo = findViewById(R.id.photo)
 
         val arguments = getIntent().getExtras()
-        arrayId = arguments?.getIntArray("arrayId")
-        randomId = arrayId!!.random()
+        stringId = arguments?.getString("arrayId").toString()
+        var temp : IntArray = IntArray(stringId.length)
+        var t = 0
+        var count = 0
+        for (i in stringId){
+            t = i.toInt()
+            temp.set(count, t)
+        }
+        randomId = temp.random()
         val url_for_get_info = "$url_start/fishes_list/${randomId}/"
         make_get_request(url_for_get_info)
 
@@ -55,7 +62,7 @@ class FishHuntActivity : AppCompatActivity() {
     fun go_photo(view: View) {
         val randomIntent = Intent(this, CameraActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("arrayId", stringId)
         randomIntent.putExtra("url_start", url_start)
         startActivity(randomIntent)
         finish()

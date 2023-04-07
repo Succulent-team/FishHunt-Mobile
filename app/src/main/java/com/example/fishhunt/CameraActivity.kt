@@ -19,7 +19,7 @@ import java.util.*
 class CameraActivity : AppCompatActivity() {
     private val REQUEST_TAKE_PHOTO = 1
     var url_start : String? = ""
-    private var arrayId : IntArray? = IntArray(0)
+    private var stringId = ""
     private var randomId : Int? = 0
 
 
@@ -29,7 +29,7 @@ class CameraActivity : AppCompatActivity() {
 
 
         val arguments = getIntent().getExtras()
-        arrayId = arguments?.getIntArray("arrayId")
+        stringId = arguments?.getString("arrayId").toString()
         randomId = arguments?.getInt("randomId")
         url_start = arguments?.getString("url_start")
         Log.d("-", randomId.toString())
@@ -109,21 +109,21 @@ class CameraActivity : AppCompatActivity() {
     private fun access(){
         val randomIntent = Intent(this, ResultOkActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("arrayId", stringId)
         startActivity(randomIntent)
         finish()
     }
     private fun fail(){
         val randomIntent = Intent(this, ResultFailActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("arrayId", stringId)
         startActivity(randomIntent)
         finish()
     }
 
     private fun not_work(){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("arrayId", stringId)
         startActivity(randomIntent)
         finish()
     }

@@ -6,19 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 class ResultFailActivity : AppCompatActivity() {
-    private var arrayId : IntArray? = IntArray(0)
+    private var stringId = ""
     private var randomId : Int? = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_fail)
 
         val arguments = getIntent().getExtras()
-        arrayId = arguments?.getIntArray("arrayId")
+        stringId = arguments?.getString("arrayId").toString()
         randomId = arguments?.getInt("randomId")
     }
     fun go_fish(view: View){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("arrayId", stringId)
         startActivity(randomIntent)
         finish()
     }
