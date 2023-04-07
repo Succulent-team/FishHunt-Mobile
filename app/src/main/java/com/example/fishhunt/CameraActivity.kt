@@ -36,8 +36,7 @@ class CameraActivity : AppCompatActivity() {
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
-            val randomIntent = Intent(this, FishHuntActivity::class.java)
-            randomIntent.putExtra("now_id_fish", now_id_fish)
+            val randomIntent = Intent(this, MainActivity2::class.java)
             Toast.makeText(applicationContext, "CameraActivity_error", Toast.LENGTH_SHORT).show()
             startActivity(randomIntent)
             finish()
@@ -61,6 +60,12 @@ class CameraActivity : AppCompatActivity() {
             val encodedString: String = Base64.getEncoder().encodeToString(image)
             make_post_request(url_for_get_info, encodedString)
 //            imageView.setImageBitmap(thumbnailBitmap)
+        }
+        else{
+            val randomIntent = Intent(this, FishHuntActivity::class.java)
+            Toast.makeText(applicationContext, "CameraCancel_error", Toast.LENGTH_SHORT).show()
+            startActivity(randomIntent)
+            finish()
         }
     }
     fun make_post_request(url : String, image : String) {
@@ -96,20 +101,17 @@ class CameraActivity : AppCompatActivity() {
 
     fun access(){
         val randomIntent = Intent(this, ResultOkActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
         finish()
     }
     fun fail(){
         val randomIntent = Intent(this, ResultFailActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
         finish()
     }
 
     fun not_work(){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
         startActivity(randomIntent)
         finish()
     }

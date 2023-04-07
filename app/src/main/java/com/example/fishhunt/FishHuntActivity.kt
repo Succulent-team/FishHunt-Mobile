@@ -21,7 +21,7 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var name: TextView
     private lateinit var description: Button
     private lateinit var photo: ImageView
-    private var now_id_fish: String = ""
+    private var now_id_fish: String = (0..4).random().toString()
     private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
 
 
@@ -35,11 +35,7 @@ class FishHuntActivity : AppCompatActivity() {
         name = findViewById(R.id.name)
         description = findViewById(R.id.description)
         photo = findViewById(R.id.photo)
-
-        val arguments = getIntent().getExtras()
-        now_id_fish = arguments?.getString("now_id_fish").toString()
-
-        val url_for_get_info = "$url_start/fishes_list/$now_id_fish/"
+        val url_for_get_info = "$url_start/fishes_list/${now_id_fish}/"
 
         make_get_request(url_for_get_info)
 
@@ -61,6 +57,7 @@ class FishHuntActivity : AppCompatActivity() {
         randomIntent.putExtra("url_start", url_start)
         startActivity(randomIntent)
         finish()
+
     }
 
     fun make_get_request(url : String) {
@@ -70,6 +67,7 @@ class FishHuntActivity : AppCompatActivity() {
             Request.Method.GET, url,
             Response.Listener<String> { response ->
                 val json = JSONObject(response)
+//                now_id_fish = json.getString("id")
                 val name_resp = "Ваша цель:\n" + reverse(json.getString("name"))
                 val description_resp = reverse(json.getString("description"))
                 name.text = name_resp
