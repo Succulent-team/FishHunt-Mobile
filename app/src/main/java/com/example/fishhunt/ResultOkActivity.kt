@@ -6,12 +6,20 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 
 class ResultOkActivity : AppCompatActivity() {
+    private var arrayId : IntArray? = IntArray(0)
+    private var randomId : Int? = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_ok)
+
+        val arguments = getIntent().getExtras()
+        arrayId = arguments?.getIntArray("arrayId")
+        randomId = arguments?.getInt("randomId")
+        arrayId!!.dropWhile{it == randomId}
     }
     fun go_fish(view: View){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
 

@@ -21,12 +21,10 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var name: TextView
     private lateinit var description: Button
     private lateinit var photo: ImageView
-    private var now_id_fish: String = (1..4).random().toString()
     private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
+    private var arrayId : IntArray? = IntArray(0)
+    private var randomId = 0
 
-
-    private val REQUEST_TAKE_PHOTO = 1
-    private lateinit var go_photo: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,8 +33,11 @@ class FishHuntActivity : AppCompatActivity() {
         name = findViewById(R.id.name)
         description = findViewById(R.id.description)
         photo = findViewById(R.id.photo)
-        val url_for_get_info = "$url_start/fishes_list/${now_id_fish}/"
 
+        val arguments = getIntent().getExtras()
+        arrayId = arguments?.getIntArray("arrayId")
+        randomId = arrayId!!.random()
+        val url_for_get_info = "$url_start/fishes_list/${randomId}/"
         make_get_request(url_for_get_info)
 
 //        go_photo.setOnClickListener {
@@ -53,7 +54,8 @@ class FishHuntActivity : AppCompatActivity() {
 
     fun go_photo(view: View) {
         val randomIntent = Intent(this, CameraActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
+        randomIntent.putExtra("randomId", randomId)
+        randomIntent.putExtra("arrayId", arrayId)
         randomIntent.putExtra("url_start", url_start)
         startActivity(randomIntent)
         finish()
@@ -147,7 +149,7 @@ class FishHuntActivity : AppCompatActivity() {
 
     fun make_picasso(item : ImageView) {
         var temp = R.drawable.fish_1
-        when(now_id_fish.toInt()){
+        when(randomId){
             (1) -> temp=R.drawable.fish_1
             (2) -> temp=R.drawable.fish_2
             (3) -> temp=R.drawable.fish_3

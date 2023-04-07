@@ -17,8 +17,9 @@ import java.util.*
 
 class CameraActivity : AppCompatActivity() {
     private val REQUEST_TAKE_PHOTO = 1
-    var now_id_fish = ""
-    var url_start = ""
+    var url_start : String? = ""
+    private var arrayId : IntArray? = IntArray(0)
+    private var randomId : Int? = 0
     var bool_access : Boolean = true
 
 
@@ -28,8 +29,9 @@ class CameraActivity : AppCompatActivity() {
 
 
         val arguments = getIntent().getExtras()
-        now_id_fish = arguments?.getString("now_id_fish").toString()
-        url_start = arguments?.getString("url_start").toString()
+        arrayId = arguments?.getIntArray("arrayId")
+        randomId = arguments?.getInt("randomId")
+        url_start = arguments?.getString("url_start")
 
 
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -91,7 +93,7 @@ class CameraActivity : AppCompatActivity() {
         {
             override fun getParams(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
-                params["fish_id"] = now_id_fish
+                params["fish_id"] = randomId.toString()
                 params["image"] = image
                 return params
             }
@@ -103,17 +105,22 @@ class CameraActivity : AppCompatActivity() {
 
     fun access(){
         val randomIntent = Intent(this, ResultOkActivity::class.java)
+        randomIntent.putExtra("randomId", randomId)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
     fun fail(){
         val randomIntent = Intent(this, ResultFailActivity::class.java)
+        randomIntent.putExtra("randomId", randomId)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
 
     fun not_work(){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
