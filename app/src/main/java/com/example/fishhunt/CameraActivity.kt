@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
@@ -20,7 +21,6 @@ class CameraActivity : AppCompatActivity() {
     var url_start : String? = ""
     private var arrayId : IntArray? = IntArray(0)
     private var randomId : Int? = 0
-    var bool_access : Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class CameraActivity : AppCompatActivity() {
         arrayId = arguments?.getIntArray("arrayId")
         randomId = arguments?.getInt("randomId")
         url_start = arguments?.getString("url_start")
-
+        Log.d("-", randomId.toString())
 
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
@@ -44,12 +44,8 @@ class CameraActivity : AppCompatActivity() {
             startActivity(randomIntent)
             finish()
         }
-        if (bool_access){
-            access()
-        }
-        else{
-            fail()
-        }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -68,6 +64,7 @@ class CameraActivity : AppCompatActivity() {
             val image = stream.toByteArray()
             val encodedString: String = Base64.getEncoder().encodeToString(image)
             make_post_request(url_for_get_info, encodedString)
+            Log.d("-", "----")
 //            imageView.setImageBitmap(thumbnailBitmap)
         }
         else{
@@ -77,13 +74,19 @@ class CameraActivity : AppCompatActivity() {
             finish()
         }
     }
-    fun make_post_request(url : String, image : String) {
+    private fun make_post_request(url : String, image : String) {
         val queue = Volley.newRequestQueue(this);
         val stringRequest = object : StringRequest(
             Request.Method.POST, url,
             Response.Listener<String> { response ->
                 var temp = JSONObject(response)
-                bool_access = temp.getBoolean("result")
+                Log.d("-", response.toString())
+                if(temp.getBoolean("result")){
+                    access()
+                }
+                else{
+                    fail()
+                }
             },
             Response.ErrorListener {
                 Toast.makeText(applicationContext, "Network_error", Toast.LENGTH_SHORT).show()
@@ -103,14 +106,14 @@ class CameraActivity : AppCompatActivity() {
         queue.add(stringRequest)
     }
 
-    fun access(){
+    private fun access(){
         val randomIntent = Intent(this, ResultOkActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
         randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
-    fun fail(){
+    private fun fail(){
         val randomIntent = Intent(this, ResultFailActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
         randomIntent.putExtra("arrayId", arrayId)
@@ -118,19 +121,12 @@ class CameraActivity : AppCompatActivity() {
         finish()
     }
 
-    fun not_work(){
+    private fun not_work(){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
         randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
-
-
-
-
-
-
-
 
 
 }
