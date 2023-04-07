@@ -21,7 +21,7 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var name: TextView
     private lateinit var description: Button
     private lateinit var photo: ImageView
-    private var now_id_fish: String = (0..4).random().toString()
+    private var now_id_fish: String = (1..4).random().toString()
     private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
 
 

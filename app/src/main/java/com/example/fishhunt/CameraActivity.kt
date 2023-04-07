@@ -19,6 +19,7 @@ class CameraActivity : AppCompatActivity() {
     private val REQUEST_TAKE_PHOTO = 1
     var now_id_fish = ""
     var url_start = ""
+    var bool_access : Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +41,12 @@ class CameraActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "CameraActivity_error", Toast.LENGTH_SHORT).show()
             startActivity(randomIntent)
             finish()
+        }
+        if (bool_access){
+            access()
+        }
+        else{
+            fail()
         }
     }
 
@@ -74,12 +81,7 @@ class CameraActivity : AppCompatActivity() {
             Request.Method.POST, url,
             Response.Listener<String> { response ->
                 var temp = JSONObject(response)
-                if (temp.getBoolean("result")){
-                    access()
-                }
-                else{
-                    fail()
-                }
+                bool_access = temp.getBoolean("result")
             },
             Response.ErrorListener {
                 Toast.makeText(applicationContext, "Network_error", Toast.LENGTH_SHORT).show()
