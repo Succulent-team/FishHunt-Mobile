@@ -1,11 +1,8 @@
 package com.example.fishhunt
 
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
@@ -18,8 +15,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
-import java.io.ByteArrayOutputStream
-import java.util.*
 
 
 class FishHuntActivity : AppCompatActivity() {
@@ -31,7 +26,7 @@ class FishHuntActivity : AppCompatActivity() {
 
 
     private val REQUEST_TAKE_PHOTO = 1
-    private lateinit var take_photo: Button
+    private lateinit var go_photo: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +35,6 @@ class FishHuntActivity : AppCompatActivity() {
         name = findViewById(R.id.name)
         description = findViewById(R.id.description)
         photo = findViewById(R.id.photo)
-        take_photo = findViewById(R.id.take_photo)
 
         val arguments = getIntent().getExtras()
         now_id_fish = arguments?.getString("now_id_fish").toString()
@@ -49,14 +43,9 @@ class FishHuntActivity : AppCompatActivity() {
 
         make_get_request(url_for_get_info)
 
-        take_photo.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            try {
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-            }
-        }
+//        go_photo.setOnClickListener {
+//            Log.d("-", "-")
+//        }
 
     }
 
@@ -66,13 +55,13 @@ class FishHuntActivity : AppCompatActivity() {
         finish()
     }
 
-//    fun go_make_photo(view: View) {
-//        val randomIntent = Intent(this, CameraActivity::class.java)
-//        randomIntent.putExtra("now_id_fish", now_id_fish)
-//        randomIntent.putExtra("url_start", url_start)
-//        startActivity(randomIntent)
-//        finish()
-//    }
+    fun go_photo(view: View) {
+        val randomIntent = Intent(this, CameraActivity::class.java)
+        randomIntent.putExtra("now_id_fish", now_id_fish)
+        randomIntent.putExtra("url_start", url_start)
+        startActivity(randomIntent)
+        finish()
+    }
 
     fun make_get_request(url : String) {
         val queue = Volley.newRequestQueue(this)
@@ -171,71 +160,5 @@ class FishHuntActivity : AppCompatActivity() {
 
     }
 
-//-------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------
-//camera
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
-            // Фотка сделана, извлекаем миниатюру картинки
-            val thumbnailBitmap = data?.extras?.get("data") as Bitmap
-
-            val url_for_get_info = "$url_start/validate_fish/"
-
-            val bitmap = thumbnailBitmap
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
-            val image = stream.toByteArray()
-            val encodedString: String = Base64.getEncoder().encodeToString(image)
-            make_post_request(url_for_get_info, encodedString)
-//            imageView.setImageBitmap(thumbnailBitmap)
-        }
-    }
-    fun make_post_request(url : String, image : String) {
-        val queue = Volley.newRequestQueue(this);
-        val stringRequest = object : StringRequest(
-            Request.Method.POST, url,
-            Response.Listener<String> { response ->
-                var temp = JSONObject(response)
-                if (temp.getBoolean("result")){
-                    access()
-                }
-                else{
-                    fail()
-                }
-            },
-            Response.ErrorListener { not_work() })
-        {
-            override fun getParams(): Map<String, String> {
-                val params: MutableMap<String, String> = HashMap()
-                params["fish_id"] = now_id_fish
-                params["image"] = image
-                return params
-            }
-
-        }
-
-        queue.add(stringRequest)
-    }
-
-    fun access(){
-        val randomIntent = Intent(this, ResultOkActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
-        startActivity(randomIntent)
-        finish()
-    }
-    fun fail(){
-        val randomIntent = Intent(this, ResultFailActivity::class.java)
-        randomIntent.putExtra("now_id_fish", now_id_fish)
-        startActivity(randomIntent)
-        finish()
-    }
-
-    fun not_work(){
-        take_photo.text = "Плохое соединение"
-    }
 
 }
