@@ -122,21 +122,23 @@ class FishHuntActivity : AppCompatActivity() {
         val low_s = "абвгдежзийклмнопрстуфхцчшщъыьэюя"
         val up_s = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
         val s = " "
-        if (a1==112){
-            if (a2 > 80){
-                val t = (a2 - 112) * -1
-                return up_s[t]
+        try {
+            if (a1 == 112) {
+                if (a2 > 80) {
+                    val t = (a2 - 112) * -1
+                    return up_s[t]
+                }
+                val t = (a2 - 80) * -1
+                return low_s[t]
+
             }
-            val t = (a2 - 80) * -1
-            return low_s[t]
-
+            if (a1 == 111 && (113 <= a2) && (128 >= a2)) {
+                val t = (a2 - 128) * -1 + 16
+                return low_s[t]
+            }
         }
-        if (a1==111){
-            val t = (a2 - 128) * -1 + 16
-            return low_s[t]
-        }
-
-        return s[0]
+        finally {}
+        return ' '
     }
 
 
