@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -35,17 +36,13 @@ class CameraActivity : AppCompatActivity() {
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
+            val randomIntent = Intent(this, FishHuntActivity::class.java)
+            randomIntent.putExtra("now_id_fish", now_id_fish)
+            Toast.makeText(applicationContext, "CameraActivity_error", Toast.LENGTH_SHORT).show()
+            startActivity(randomIntent)
+            finish()
         }
     }
-
-
-
-
-
-
-
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -58,6 +55,7 @@ class CameraActivity : AppCompatActivity() {
 
             val bitmap = thumbnailBitmap
             val stream = ByteArrayOutputStream()
+
             bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
             val image = stream.toByteArray()
             val encodedString: String = Base64.getEncoder().encodeToString(image)
@@ -78,7 +76,11 @@ class CameraActivity : AppCompatActivity() {
                     fail()
                 }
             },
-            Response.ErrorListener { not_work() })
+            Response.ErrorListener {
+                Toast.makeText(applicationContext, "Network_error", Toast.LENGTH_SHORT).show()
+                not_work()
+
+            })
         {
             override fun getParams(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
