@@ -17,15 +17,29 @@ class ResultOkActivity : AppCompatActivity() {
     }
     fun go_fish(view: View){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
-        startActivity(randomIntent)
-        finish()
+        if (now_id_fish.toInt() >= 4){
+            randomIntent.putExtra("now_id_fish", "1")
+            startActivity(randomIntent)
+            finish()
+        }
+        else {
+            randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
+            startActivity(randomIntent)
+            finish()
+        }
     }
     fun go_menu(view: View){
         val randomIntent = Intent(this, MainActivity2::class.java)
-        randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
-        startActivity(randomIntent)
-        finish()
+        if (now_id_fish.toInt() >= 4){
+            randomIntent.putExtra("now_id_fish", "1")
+            startActivity(randomIntent)
+            finish()
+        }
+        else {
+            randomIntent.putExtra("now_id_fish", (now_id_fish.toInt() + 1).toString())
+            startActivity(randomIntent)
+            finish()
+        }
     }
 
 

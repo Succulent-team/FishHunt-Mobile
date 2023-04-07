@@ -27,7 +27,7 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var description: Button
     private lateinit var photo: ImageView
     private var now_id_fish: String = ""
-    private val url_start = "https://9650-2a03-d000-7005-f007-abad-39be-d4b6-b7ef.ngrok.io"
+    private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
 
 
     private val REQUEST_TAKE_PHOTO = 1
@@ -40,7 +40,6 @@ class FishHuntActivity : AppCompatActivity() {
         name = findViewById(R.id.name)
         description = findViewById(R.id.description)
         photo = findViewById(R.id.photo)
-
         take_photo = findViewById(R.id.take_photo)
 
         val arguments = getIntent().getExtras()
@@ -81,21 +80,16 @@ class FishHuntActivity : AppCompatActivity() {
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             Response.Listener<String> { response ->
-//                Log.d("-", response.toString())
                 val json = JSONObject(response)
                 val name_resp = "Ваша цель:\n" + reverse(json.getString("name"))
                 val description_resp = reverse(json.getString("description"))
                 name.text = name_resp
                 description.text = description_resp
-                val url_to_fish_resp = json.getString("image")
-//                Log.d("-", "2")
-                make_picasso(url_to_fish_resp, photo)
-//                Log.d("-", "3")
+
             },
             Response.ErrorListener {Log.d("-", "Not work internet") })
-//        Log.d("-", "0")
         queue.add(stringRequest)
-//        Log.d("-", "work")
+        make_picasso(photo)
     }
 
     fun reverse(start_str : String):String{
@@ -109,6 +103,15 @@ class FishHuntActivity : AppCompatActivity() {
                 temp = getAlphaChar(byte_string[i+1].toInt()*-1, byte_string[i+3].toInt()*-1)
                 i += 4
                 result += temp
+            }
+            else if(byte_string[i].toInt()==45){
+                result += '-'
+                i+=1
+            }
+            else if((byte_string[i].toInt()>=48) && (byte_string[i].toInt()<=57)){
+                val temp_str = "0123456789---"
+                result += temp_str[byte_string[i].toInt()-48]
+                i+=1
             }
             else if(byte_string[i].toInt()==13 && byte_string[i+1].toInt()==10){
                 i += 2
@@ -151,7 +154,7 @@ class FishHuntActivity : AppCompatActivity() {
 
 
 
-    fun make_picasso(url : String, item : ImageView) {
+    fun make_picasso(item : ImageView) {
         var temp = R.drawable.fish_1
         when(now_id_fish.toInt()){
             (1) -> temp=R.drawable.fish_1
@@ -165,7 +168,6 @@ class FishHuntActivity : AppCompatActivity() {
             .centerCrop()
             .fit()
             .into(item);
-        Log.d("pic", url)
 
     }
 
@@ -198,7 +200,6 @@ class FishHuntActivity : AppCompatActivity() {
             Request.Method.POST, url,
             Response.Listener<String> { response ->
                 var temp = JSONObject(response)
-//                Log.d("--", response.toString())
                 if (temp.getBoolean("result")){
                     access()
                 }

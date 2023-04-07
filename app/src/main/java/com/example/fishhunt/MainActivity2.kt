@@ -12,14 +12,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
     }
-    /*fun countMe (view: View) {
-        val countString = counter.text.toString()
-        var count: Int = Integer.parseInt(countString)
-        count++
-        counter.text = count.toString()
-        val toasting = Toast.makeText(this, count.toString(), Toast.LENGTH_SHORT)
-        toasting.show()
-    }*/
+
     fun go_to_game(view: View){
         val intent = Intent(this, FishHuntActivity::class.java)
         intent.putExtra("now_id_fish", "1")
