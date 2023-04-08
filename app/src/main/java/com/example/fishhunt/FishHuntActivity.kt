@@ -3,6 +3,7 @@ package com.example.fishhunt
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
@@ -21,8 +22,8 @@ class FishHuntActivity : AppCompatActivity() {
     private lateinit var name: TextView
     private lateinit var description: Button
     private lateinit var photo: ImageView
-    private val url_start = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
-    private var stringId = ""
+    private val urlStart = "https://1c91-2a03-d000-7005-f007-4e7b-2d90-ed33-1e8f.ngrok.io"
+    private var arrayId = IntArray(0)
     private var randomId = 0
 
 
@@ -34,17 +35,16 @@ class FishHuntActivity : AppCompatActivity() {
         description = findViewById(R.id.description)
         photo = findViewById(R.id.photo)
 
-        val arguments = getIntent().getExtras()
-        stringId = arguments?.getString("arrayId").toString()
-        var temp : IntArray = IntArray(stringId.length)
-        var t = 0
-        var count = 0
-        for (i in stringId){
-            t = i.toInt()
-            temp.set(count, t)
+        val arguments = getIntent()
+        val temp : IntArray?
+        temp = arguments?.getIntArrayExtra("arrayId")
+        if (temp!=null){
+            arrayId = temp
         }
-        randomId = temp.random()
-        val url_for_get_info = "$url_start/fishes_list/${randomId}/"
+
+
+        randomId = arrayId.random()
+        val url_for_get_info = "$urlStart/fishes_list/${randomId}/"
         make_get_request(url_for_get_info)
 
 //        go_photo.setOnClickListener {
@@ -62,8 +62,8 @@ class FishHuntActivity : AppCompatActivity() {
     fun go_photo(view: View) {
         val randomIntent = Intent(this, CameraActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", stringId)
-        randomIntent.putExtra("url_start", url_start)
+        randomIntent.putExtra("arrayId", arrayId)
+        randomIntent.putExtra("urlStart", urlStart)
         startActivity(randomIntent)
         finish()
 

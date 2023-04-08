@@ -18,9 +18,9 @@ import java.util.*
 
 class CameraActivity : AppCompatActivity() {
     private val REQUEST_TAKE_PHOTO = 1
-    var url_start : String? = ""
-    private var stringId = ""
-    private var randomId : Int? = 0
+    var urlStart : String = ""
+    private var arrayId = IntArray(0)
+    private var randomId : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +28,26 @@ class CameraActivity : AppCompatActivity() {
         setContentView(R.layout.activity_camera)
 
 
-        val arguments = getIntent().getExtras()
-        stringId = arguments?.getString("arrayId").toString()
-        randomId = arguments?.getInt("randomId")
-        url_start = arguments?.getString("url_start")
-        Log.d("-", randomId.toString())
+        val arguments = getIntent()
+
+        val temp1 : IntArray?
+        temp1 = arguments?.getIntArrayExtra("arrayId")
+        if (temp1!=null){
+            arrayId = temp1
+        }
+
+
+        val temp2 : Int?
+        temp2 = arguments?.getIntExtra("randomId", 1)
+        if (temp2!=null){
+            randomId = temp2
+        }
+
+        val temp3 : String?
+        temp3 = arguments?.getStringExtra("urlStart")
+        if (temp3!=null){
+            urlStart = temp3
+        }
 
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
@@ -55,7 +70,7 @@ class CameraActivity : AppCompatActivity() {
             // Фотка сделана, извлекаем миниатюру картинки
             val thumbnailBitmap = data?.extras?.get("data") as Bitmap
 
-            val url_for_get_info = "$url_start/validate_fish/"
+            val url_for_get_info = "$urlStart/validate_fish/"
 
             val bitmap = thumbnailBitmap
             val stream = ByteArrayOutputStream()
@@ -109,21 +124,21 @@ class CameraActivity : AppCompatActivity() {
     private fun access(){
         val randomIntent = Intent(this, ResultOkActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", stringId)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
     private fun fail(){
         val randomIntent = Intent(this, ResultFailActivity::class.java)
         randomIntent.putExtra("randomId", randomId)
-        randomIntent.putExtra("arrayId", stringId)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }
 
     private fun not_work(){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("arrayId", stringId)
+        randomIntent.putExtra("arrayId", arrayId)
         startActivity(randomIntent)
         finish()
     }

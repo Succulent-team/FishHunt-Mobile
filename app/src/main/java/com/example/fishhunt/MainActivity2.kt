@@ -13,8 +13,9 @@ class MainActivity2 : AppCompatActivity() {
 
     fun go_to_game(view: View){
         val intent = Intent(this, FishHuntActivity::class.java)
+        val arrayId = intArrayOf(1, 2, 3, 4)
         val stringId = "1234"
-        intent.putExtra("stringId", stringId)
+        intent.putExtra("arrayId", arrayId)
         startActivity(intent)
         finish()
 

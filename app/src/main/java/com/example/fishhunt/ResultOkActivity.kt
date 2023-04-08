@@ -7,29 +7,41 @@ import android.util.Log
 import android.view.View
 
 class ResultOkActivity : AppCompatActivity() {
-    var stringId = ""
-    var randomId : Int? = 0
+    var arrayId = IntArray(0)
+    var newArrayId = IntArray(0)
+    var randomId : Int = 0
     var res = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_ok)
 
-        val arguments = getIntent().getExtras()
-        stringId = arguments!!.getString("arrayId").toString()
-        randomId = arguments?.getInt("randomId")
+        val arguments = getIntent()
 
-        Log.d("-", stringId)
-        for (i in stringId){
-            if (i.toString() != randomId.toString()){
-                res += i
+        val temp1 : IntArray?
+        temp1 = arguments?.getIntArrayExtra("arrayId")
+        if (temp1!=null){
+            arrayId = temp1
+        }
+
+
+        val temp2 : Int?
+        temp2 = arguments?.getIntExtra("randomId", 1)
+        if (temp2!=null){
+            randomId = temp2
+        }
+        var count = 0
+        for (i in arrayId){
+            if (i != randomId){
+                newArrayId.set(count, i)
+                count += 1
             }
         }
-        Log.d("-", res)
+
     }
     fun go_fish(view: View){
         val randomIntent = Intent(this, FishHuntActivity::class.java)
-        randomIntent.putExtra("arrayId", res)
+        randomIntent.putExtra("arrayId", newArrayId)
         startActivity(randomIntent)
         finish()
 
